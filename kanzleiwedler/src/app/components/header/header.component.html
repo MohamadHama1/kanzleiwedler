@@ -1,0 +1,21 @@
+ <header class="header">
+      <div class="logo-section">
+        <div class="logo">
+          <div class="scales">⚖</div>
+          <div class="firm-name">
+            <h1>WEDLER</h1>
+            <p>Rechtsanwälte</p>
+          </div>
+        </div>
+      </div>
+      
+      <nav class="navigation">
+        <button 
+          *ngFor="let item of navItems" 
+          [class.active]="activeItem === item.key"
+          (click)="navigate(item.key)"
+          class="nav-button">
+          {{ item.label }}
+        </button>
+      </nav>
+    </header>

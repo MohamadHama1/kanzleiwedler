@@ -1,0 +1,64 @@
+   <div class="lawyers-container">
+      <h2>Unsere Anwälte</h2>
+      <div class="divider"></div>
+      
+      <!-- Lawyer Selection Carousel -->
+      <div class="lawyers-carousel">
+        <div 
+          *ngFor="let lawyer of lawyers; let i = index" 
+          class="lawyer-selector"
+          [class.active]="selectedLawyerIndex === i"
+          (click)="selectLawyer(i)">
+        <div class="selector-avatar">
+  <img 
+    [src]="lawyer.image2" 
+    [alt]="lawyer.name"
+    *ngIf="lawyer.image2; else selectorInitialsTemplate"
+    class="selector-photo">
+  <ng-template #selectorInitialsTemplate>
+    <span class="selector-initials">{{ lawyer.initials }}</span>
+  </ng-template>
+</div>
+         <span class="selector-name">{{ lawyer.name.split(' ')[0].charAt(0) }}. {{ lawyer.name.split(' ').slice(-1)[0] }}</span>
+        </div>
+      </div>
+      
+      <!-- Selected Lawyer Details -->
+      <div class="lawyer-details" *ngIf="selectedLawyer">
+        <div class="lawyer-image">
+          <div class="professional-photo">
+            <img 
+              [src]="selectedLawyer.image" 
+              [alt]="selectedLawyer.name"
+              *ngIf="selectedLawyer.image; else initialsTemplate"
+              class="lawyer-photo">
+            <ng-template #initialsTemplate>
+              <div class="photo-initials">{{ selectedLawyer.initials }}</div>
+            </ng-template>
+          </div>
+        </div>
+        
+        <div class="lawyer-info">
+          <h3>{{ selectedLawyer.name }}</h3>
+          <p class="title">{{ selectedLawyer.title }}</p>
+          <div class="specialization-section">
+            <h4>Tätigkeitsschwerpunkte</h4>
+            <p>{{ selectedLawyer.specialization }}</p>
+          </div>
+          <div class="experience-section">
+            <h4>Berufserfahrung</h4>
+            <p>{{ selectedLawyer.experience }} Jahre</p>
+          </div>
+          <div class="achievements-section">
+            <h4>Weitere Informationen</h4>
+            <ul>
+              <li *ngFor="let achievement of selectedLawyer.achievements">{{ achievement }}</li>
+            </ul>
+          </div>
+          <div class="personal-section" *ngIf="selectedLawyer.personal">
+            <h4>Persönliches</h4>
+            <p>{{ selectedLawyer.personal }}</p>
+          </div>
+        </div>
+      </div>
+    </div>
