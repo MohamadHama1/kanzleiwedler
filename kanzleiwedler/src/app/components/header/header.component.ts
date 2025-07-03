@@ -1,27 +1,45 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+// header.component.ts
+import { Component } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { RouterModule, Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './header.component.html',
   styleUrl: './header.component.scss'
 })
 export class HeaderComponent {
- @Output() navigationChange = new EventEmitter<string>();
-  
-  activeItem = 'about';
-  
   navItems = [
-    { key: 'about', label: 'Über Uns' },
-    { key: 'lawyers', label: 'Anwälte' },
-    { key: 'services', label: 'Leistungen' },
-    { key: 'contact', label: 'Kontakt' }
+    { key: 'about', label: 'Über Uns', route: '/about' },
+    { key: 'lawyers', label: 'Anwälte', route: '/lawyers' },
+    { key: 'services', label: 'Leistungen', route: '/services' },
+    { key: 'contact', label: 'Kontakt', route: '/contact' }
   ];
   
-  navigate(page: string) {
-    this.activeItem = page;
-    this.navigationChange.emit(page);
+  // Router options for exact matching
+  exactMatchOptions = {
+    paths: 'exact' as const,
+    queryParams: 'ignored' as const,
+    fragment: 'ignored' as const,
+    matrixParams: 'ignored' as const
+  };
+  
+  defaultMatchOptions = {
+    paths: 'subset' as const,
+    queryParams: 'ignored' as const,
+    fragment: 'ignored' as const,
+    matrixParams: 'ignored' as const
+  };
+  
+  constructor(private router: Router) {}
+  
+  navigate(route: string) {
+    this.router.navigate([route]);
+  }
+  
+  getRouterOptions(key: string) {
+    return key === 'home' ? this.exactMatchOptions : this.defaultMatchOptions;
   }
 }

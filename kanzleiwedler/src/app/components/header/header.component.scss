@@ -6,6 +6,11 @@
   background: rgba(0, 0, 0, 0.8);
   backdrop-filter: blur(10px);
   border-bottom: 1px solid #d4af37;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
   
   @media (max-width: 768px) {
     flex-direction: column;
@@ -87,6 +92,7 @@
   padding: 0.5rem 1rem;
   position: relative;
   transition: all 0.3s ease;
+  text-decoration: none;
   
   @media (max-width: 768px) {
     font-size: 1rem;
@@ -118,4 +124,15 @@
 .nav-button:hover::after,
 .nav-button.active::after {
   width: 100%;
+}
+
+// Add padding to body content to account for fixed header
+:host {
+  ~ * {
+    padding-top: 120px; // Adjust based on your header height
+    
+    @media (max-width: 768px) {
+      padding-top: 140px;
+    }
+  }
 }

@@ -1,0 +1,23 @@
+<section class="hero-section" id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-overlay"></div>
+  <div class="container">
+    <div class="hero-content">
+      <div class="hero-text">
+        <img [src]="heroMobileLogo" alt="Rechtsanwälte Wedler Logo" class="hero-logo-mobile" />
+        <p class="hero-tagline">{{ heroData.tagline }}</p>
+        <h1>{{ heroData.title }}</h1>
+        <p class="hero-description" ></p>
+        <div class="hero-buttons">
+          <a href="/services" mat-stroked-button class="learn-more-btn">
+            <mat-icon>arrow_forward</mat-icon>
+          
+          </a>
+          <button mat-raised-button color="accent" class="contact-btn">
+            
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
